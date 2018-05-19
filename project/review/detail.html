@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>检核详情</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/review.css?v=1.1" />
+    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="js/detail.js?v=1.1"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1 class="banner-title">录音检核</h1>
+            <div class="banner-logo">
+                <img src="image/lianjia.png" />
+            </div>
+        </div>
+        <div class="mainRecording">
+            <div class="mainPalyer" style="position:relative;display:none;">
+                <div class="player" style="padding-left:12px;padding-right:10px;width:168px;">
+                    <img src="image/player-a.png" />
+                    <div class="player-icon"></div>
+                    <div class="player-title">录音编号：123456789</div>
+                    <div class="player-bar"></div>
+                </div>
+                <div class="playTime">02:08'33''</div>
+                <div class="player-bar-two" style="width:168px;height:10px;background-color:red;margin-top:45px;position:absolute;margin-left:12px;cursor:pointer">
+                    <div class="playerBar" style="width:0%;height:10px;background-color:#8BC34A"></div>
+                </div>
+            </div>
+            <div style="padding:20px 10px;">
+                <audio style='width:100%;' controls="controls" id="player" src="music/清明雨上.mp3"></audio>
+            </div>
+            <div class="channel">
+                <span class='channel-title'>链家网PC端</span>
+                <span class='channel-time'>2016-06-12 9:00:00</span>
+            </div>
+        </div>
+        <div class="mainBody">
+            <h2 class="h2Title">请选择来电类型</h2>
+            <h3 class="h3Title">意向类
+                <span>必填</span>
+            </h3>
+            <ul class="radioList">
+                <li class="radioList-item">
+                    <input type="radio" name="gender" id="idid" />
+                    <label></label>
+                    <div for='idid'>出售</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>求购</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>出租</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>求租</div>
+                </li>
+            </ul>
+            <h3 class="h3Title">意向类
+                <span>必填</span>
+            </h3>
+            <ul class="radioList">
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>咨询类</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>
+                        其他类
+                    </div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>
+                        超出业务范围
+                    </div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>
+                        串号
+                    </div>
+                </li>
+            </ul>
+            <h2 class="h2Title">请根据录音选择</h2>
+            <h3 class="h3Title">标准开场
+                <span>必填</span>
+            </h3>
+            <ul class="radioList">
+                <li class="radioList-item">
+                    <input type="radio" name="gender" id="idid" />
+                    <label></label>
+                    <div for='idid'>达标</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>没达标</div>
+                </li>
+            </ul>
+            <hr />
+            <h3 class="h3Title">房源是否已售</h3>
+            <ul class="radioList">
+                <li class="radioList-item">
+                    <input type="radio" name="gender" id="idid" />
+                    <label></label>
+                    <div for='idid'>是</div>
+                </li>
+                <li class="radioList-item">
+                    <input type="radio" name="gender" />
+                    <label></label>
+                    <div>否</div>
+                </li>
+            </ul>
+            <h3 class="h3Title">备注</h3>
+            <div class="dvTextarea">
+                <textarea placeholder='填写审核备注'></textarea>
+            </div>
+            <div class="mainBtn">
+                <button type="button" class='btn-primary' id="btnOK">提交</button>
+            </div>
+        </div>
+        <div class="mainShadow">
+            <div class="shadowTip">
+                <div class="shadow">
+                    <img class="imgOK" src="image/ok.png" />
+                    <h4>提交成功</h4>
+                    <h5>正在跳转...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

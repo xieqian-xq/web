@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>不合格通知</title>
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/review.css?v=1.1" />
+	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="js/list.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="banner">
+			<h1 class="banner-title">录音检核</h1>
+			<div class="banner-logo">
+				<img src="image/lianjia.png" />
+			</div>
+		</div>
+		<div class="mainFailList" style="margin-top:44px;">
+			<div class="warning">
+				（#经纪人姓名）同事您好，您的链家网400来电(录音编号：****)接听经检核，判定为不合格，并且记警告一次,累计三次将关闭链家网账号。希望您对照好接听的标准规范，掌握好接听的规范要求，做好链家网400来电接听。如有疑问请致电
+				<a href='tel:13719544172'
+				 class='aePhone'>*****123</a>（#ae手机号，可点击拨号），感谢您的配合！
+			</div>
+			<ul class="recordingList">
+				<li class="recording-item" style="border-top:1px solid #f2f2f2;">
+					<div class="recording-player">
+						<div class="player">
+							<img src="image/player-a.png" />
+							<div class="player-icon"></div>
+							<div class="player-title">录音编号：123456789</div>
+							<div class="player-bar"></div>
+							<audio style='display:none' id="player"></audio>
+						</div>
+						<div class="playTime">02:08'33''</div>
+					</div>
+					<div class="channel">
+						<span class='channel-title'>链家网PC端</span>
+						<span class='channel-time'>2016-06-12 9:00:00</span>
+					</div>
+					<div class="reviewText">
+						<b>检核评语：</b>谢谢
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="detail">
+			<h2 class="h2Title2">详细情况</h2>
+			<hr style="margin:0;border-color:#f2f2f2" />
+			<ul class="ulDetail">
+				<li class="detailItem">来电类型
+					<span>出售</span>
+				</li>
+				<li class="detailItem">标准开场
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">主动核对客户常用有效联系方式
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">向客户提示稍后发信息
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">主动邀约看房
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">态度礼仪规范
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">标准结束语
+					<span>不达标</span>
+				</li>
+				<li class="detailItem">房源是否已售
+					<span>是</span>
+				</li>
+				<li class="detailItem">房源涉及违规交易
+					<span>否</span>
+				</li>
+			</ul>
+		</div>
+		<div class="mainShadow">
+			<div class="shadowTip">
+				<img src="image/loading.gif" class="imgLoading" />
+				<h6 class="loadingText">正在加载中，请稍等。</h6>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
