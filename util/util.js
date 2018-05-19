@@ -8,6 +8,7 @@
     }
 })(this, function () {
     var util = {};
+
     // 获取查询字符串中的变量值
     util.queryString = function (name) {
         var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
