@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片居中</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .box {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .box-item {
+            margin-top: 10px;
+            width: 300px;
+            height: 300px;
+            background-color: #00ae66;
+        }
+
+        .box-item img {
+            width: 100%;
+        }
+
+        .image-box-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-box-flex img {
+            width: 90%;
+        }
+
+        .image-box-auto {
+            text-align: center;
+            line-height: 300px;
+        }
+
+        .image-box-auto img {
+            width: 90%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .image-box-auto2 {
+            display: table;
+            text-align: center;
+        }
+        .image-box-auto2 div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .image-box-auto2 img {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="box-item image-box-flex">
+            <img src="img.jpg" alt="">
+        </div>
+        <div class="box-item image-box-auto">
+            <img src="img.jpg" alt="">
+        </div>
+        <div class="box-item image-box-auto2">
+            <div>
+                <img src="img.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
