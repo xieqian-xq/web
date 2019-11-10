@@ -85,5 +85,30 @@
     return result;
   };
 
-  return util;
+    // 克隆
+    util.clone = function(obj){
+        var result;
+        switch(typeof obj){
+            case 'object':
+                if(obj === null){
+                    result = null;
+                }else if(obj instanceof Array){
+                    result = [];
+                    for(var i = 1; i < obj.length; i++){
+                        result.push(util.clone(obj[i]));
+                    }
+                }else{
+                    result = {};
+                    for(var key in obj){
+                        result[key] = util.clone(obj[key]);
+                    }
+                }
+            break;
+            default:
+                result = obj;
+        }
+        return result;
+    }
+
+    return util;
 });
