@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>倒计时</title>
+    <meta name="keywords" content="青春,校园,广交院,个人空间,ThanksMoney,那年夏天的回忆录" />
+    <meta name="description" content="谢乾（蟹钳、ThanksMoney）的个人空间，专注于青春主题，带领大家回忆那年青春。" />
+    <link rel="stylesheet" href="assets/styles/base/reset.css" />
+    <link rel="stylesheet" href="assets/styles/base/base.css" />
+    <link rel="stylesheet" href="assets/styles/base/common.css" />
+    <style type="text/css">
+        button {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            max-width: 300px;
+            display: block;
+            margin: 10px auto;
+            background-color: #000;
+            color: #fff;
+            font: normal 16px/40px '微软雅黑';
+        }
+
+        .input1 {
+            width: 100%;
+            height: 30px;
+            margin-top: 10px;
+            border: 1px solid #000;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="padding:10px;text-align:center;" id="timer">
+    </div>
+    <button id="btn" data-value="go">暂停一下</button>
+    <script type="text/javascript" src="https://libs.baidu.com/jquery/1.11.3/jquery.js"></script>
+    <script type="text/javascript">
+        var ChunJieObj = {};
+        var timer = null;
+
+        $(function () {
+            DaoJiShi();
+            timer = setInterval(DaoJiShi, 1000);
+
+            $('#btn').click(function () {
+                if ($(this).data("value") == "go") {
+                    clearInterval(timer);
+                    $(this).html("重新倒计时");
+                    $(this).data("value", "nogo");
+                } else {
+                    DaoJiShi();
+                    timer = setInterval(DaoJiShi, 1000);
+                    $(this).html("暂停一下");
+                    $(this).data("value", "go");
+                }
+
+            });
+        });
+
+        //倒计时
+        function DaoJiShi() {
+            var sb = new StringBuilder();
+            sb.Append(DJS('2020年春节倒计时', '2020-01-24', '2020年春节快乐'));
+            // sb.Append(DJS('休春节假期', '2018-02-10', '春节假期快乐'));
+            // sb.Append(DJS('2018年元旦倒计时', '2018-01-01', '2018年元旦快乐'));
+            //sb.Append(DJS('兴爷生日倒计时', '2017-12-31','兴爷生日快乐'));
+            //sb.Append(DJS('阿乾生日倒计时', '2017-11-16','阿乾生日快乐'));
+            $('#timer').html(sb.ToString());
+        }
+
+        //倒计时字符串
+        function DJS(title, time, currentDateTitle) {
+            var end = new Date(time);
+            end.setHours(0);
+            var now = new Date();
+
+            var nowDate = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+
+            if (time === nowDate) {
+                return '<h2>' + title + '</h2><h3>' + currentDateTitle + '</h3>';
+            }
+
+            var haomiao = end - now;
+
+            if (haomiao < 1) {
+                return '';
+            }
+
+            var miao = Math.floor(haomiao / 1000);
+            var $haomiao = haomiao % 1000;
+
+            var fen = Math.floor(miao / 60);
+            var $miao = miao % 60;
+
+            var shi = Math.floor(fen / 60);
+            var $fen = fen % 60;
+
+            var tian = Math.floor(shi / 24);
+            var $shi = shi % 24;
+
+            var sb = new StringBuilder();
+            sb.Append('<h2>' + title + '</h2>');
+            sb.Append('<h3>');
+            sb.Append(('00' + tian).slice(-3) + '天');
+            sb.Append(('0' + $shi).slice(-2) + '时');
+            sb.Append(('0' + $fen).slice(-2) + '分');
+            sb.Append(('0' + $miao).slice(-2) + '秒');
+            sb.Append('</h3>');
+            sb.Append('<br/>');
+
+            return sb.ToString();
+        }
+
+        function StringBuilder() {
+            this.arr = [];
+        }
+
+        StringBuilder.prototype.Append = function (str) {
+            this.arr.push(str);
+        }
+
+        StringBuilder.prototype.ToString = function () {
+            return this.arr.join('');
+        }
+
+    </script>
+</body>
+</html>

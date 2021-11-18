@@ -1,0 +1,29 @@
+﻿.clearfix {
+    *zoom: 1;
+}
+
+    .clearfix:after {
+        display: block;
+        overflow: hidden;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+        content: ".";
+    }
+
+.block, #block {
+    display: block;
+}
+
+.none, #none {
+    display: none;
+}
+
+input,button {
+    outline: none;
+}
+
+.area{
+	width:1200px;
+	margin:0 auto;
+}

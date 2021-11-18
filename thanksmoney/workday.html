@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>工作日</title>
+    <meta name="keywords" content="青春,校园,广交院,个人空间,ThanksMoney,那年夏天的回忆录" />
+    <meta name="description" content="谢乾（蟹钳、ThanksMoney）的个人空间" />
+    <link rel="stylesheet" href="App_Files/Styles/Base/reset.css" />
+    <link rel="stylesheet" href="App_Files/Styles/Base/base.css" />
+    <link rel="stylesheet" href="App_Files/Styles/Base/common.css" />
+    <style type="text/css">
+        * {
+            margin: 0;
+        }
+
+        html {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .workday-box {
+            width:100%;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+        .workday-bar{
+        	text-align: center;
+        	line-height: 30px;
+        }
+
+        .workday-table {
+            width: 100%;
+        }
+
+            .workday-table th, .workday-table td {
+                text-align: center;
+                height: 50px;
+                line-height: 50px;
+            }
+
+        .font-red {
+            color: red;
+        }
+
+        .font-blue {
+            color: blue;
+        }
+
+        .font-gray {
+            color: #ccc;
+        }
+        .point{
+            cursor:pointer;
+        }
+        .bg-current{
+            background-color:#00ae66;
+            color:#fff;
+            font-weight:600;
+        }
+
+        .workday-current{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="workday-box">
+    	<div class="workday-bar">
+            <span class="workday-pre point">上个月　</span>
+            <span class="workday-day"></span>
+            <span class="workday-next point">　下个月</span>
+    		<span class="workday-current">今天</span>
+    	</div>
+        <table class="workday-table">
+            <thead>
+                <tr>
+                    <th class="font-red">日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th class="font-red">六</th>
+                </tr>
+            </thead>
+            <tbody class="workday-body"></tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="https://libs.baidu.com/jquery/1.11.3/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            PageUtil.Init();
+        });
+
+        var PageUtil = {
+            Init: function () {
+                this.BindEvent();
+                WorkDayUtil.Init();
+            },
+            BindEvent: function () {
+                $('.workday-pre').click(function () {
+                    var date = DateUtil.PreDate(WorkDayUtil.Params.CDate);
+                    WorkDayUtil.Refresh(date);
+                });
+
+                $('.workday-next').click(function () {
+                    var date = DateUtil.NextDate(WorkDayUtil.Params.CDate);
+                    WorkDayUtil.Refresh(date);
+                });
+
+                $(".workday-current").click(function () {
+                    WorkDayUtil.Refresh();
+                });
+            }
+        };
+
+        var WorkDayUtil = {
+            ID: 'workday-body',
+            Params: {
+                CDate: ""                
+            },
+            Init: function () {
+                this.Refresh();
+            },
+            // 刷新
+            Refresh:function(date){
+            	var rgExp = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+            	date = rgExp.test(date)?date:DateUtil.GetDateObj().DateStr;
+            	this.Render(date);
+            	this.BarTitle(date);
+            	this.Params.CDate = date;
+            },
+            Render: function (date) {
+            	var dateObj = DateUtil.GetDateObj(date);
+
+            	var preYear = dateObj.Month-1==0?dateObj.Year-1:dateObj.Year,
+            		preMonth = dateObj.Month-1==0?12:dateObj.Month-1;
+
+                var result = [],
+                    day = 1,    // 当月数
+                    preDay = DateUtil.GetDaysOfMonth(preYear, preMonth),  // 上月数
+                    nextDay = 1,
+                    currentDay = dateObj.Day,
+                    currentDayClass = "bg-current";
+                    maxDay = DateUtil.GetDaysOfMonth(dateObj.Year, dateObj.Month),
+                    weekday = dateObj.WeekdayOf1 == 0 ? 7 : dateObj.WeekdayOf1,
+                    className = 'font-red',
+                    classNameGray = 'font-gray';
+                
+
+                for (var i = 0; i < 6; i++) {
+                    result.push('<tr>');
+                    for (var j = 0; j < 7; j++) {
+                        if (i == 0 && j < weekday) {
+                            // 上个月
+                            result.push('<td class="' + classNameGray + '">' + (preDay - weekday + j + 1) + '</td>');
+                            continue;
+                        }
+                        if (day <= maxDay) {
+                            // 当前月
+                            className = j == 0 || j == 6 ? "font-red" : "font-blue";
+                            currentDayClass = currentDay == day ? "bg-current" : "";
+                            result.push('<td class="' + className +" "+ currentDayClass+ '">' + day + '</td>');
+                            day++;
+                        } else {
+                            // 下个月
+                            result.push('<td class="' + classNameGray + '">' + nextDay + '</td>');
+                            nextDay++;
+                        }
+                    }
+                    result.push('</tr>');
+                }
+
+                $('.workday-body').html(result.join(''));
+            },
+            BarTitle: function (date) {
+                $('.workday-day').html(date);
+            }
+        };
+
+        var DateUtil = {
+        	Values:{
+        		Date:null,
+        		Year:0,
+        		Month:0,
+        		Day:0,
+        		Weekday:0,
+        		WeekdayOf1:0,
+        		DateStr:''
+        	},
+        	Params: {
+        	    RgExpDate: /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+        	},
+        	GetDateObj:function(date){
+				date = date || +new Date();
+                var cDate = new Date(date);
+
+                this.Values.Date = cDate;
+                this.Values.Year = cDate.getFullYear();
+                this.Values.Month = cDate.getMonth() + 1;
+                this.Values.Day = cDate.getDate();
+                this.Values.Weekday = cDate.getDay();
+                this.Values.WeekdayOf1 = this.GetWeekDayOf1(this.Values.Year,this.Values.Month);
+                this.Values.DateStr = this.Values.Year+'-'+this.Values.Month+'-'+this.Values.Day;
+                return this.Values;
+        	},
+            // 获取星期几
+            GetWeekDayOf1: function (year,month) {
+                var dateOf1 = year + '-' + month + '-01';
+                return new Date(dateOf1).getDay();
+            },
+            // 获取某个月份的天数
+            GetDaysOfMonth: function (year,month) {
+                var days = 0, date = new Date(), cMonth;
+                cMonth = date.getMonth() + 1;
+                cYear = date.getFullYear();
+
+                month = typeof month == 'number' ? month : cMonth;
+                month = month < 1 || month > 12 ? cMonth : month;
+
+                cYear = typeof year == 'number' ? year : cYear;
+
+                switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        days = 31;
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        days = 30;
+                        break;
+                    case 2:
+                        if (cYear % 100 == 0) {
+                            days = cYear % 400 == 0 ? 29 : 28;
+                        } else {
+                            days = cYear % 4 == 0 ? 29 : 28;
+                        }
+                        break;
+                }
+
+                return days;
+            },
+            // 上个月日期
+            PreDate: function (date) {
+                if (!this.Params.RgExpDate.test(date)) {
+                    return this.GetDateObj().DateStr;
+                }
+
+                date = date.split('-');
+
+                var year = date[0] * 1,
+                    month = date[1] * 1,
+                    day = date[2] * 1;
+
+                year = month - 1 == 0 ? year - 1 : year;
+                month = month - 1 == 0 ? 12 : month - 1;
+
+                var days = this.GetDaysOfMonth(year, month);
+                day = days >= day ? day : days;
+
+                return year + '-' + ('00' + month).slice(-2) + '-' + ('00' + day).slice(-2);
+            },
+            // 下个月日期
+            NextDate: function (date) {
+                if (!this.Params.RgExpDate.test(date)) {
+                    return this.GetDateObj().DateStr;
+                }
+
+                date = date.split('-');
+
+                var year = date[0] * 1,
+                    month = date[1] * 1,
+                    day = date[2] * 1;
+
+                year = month + 1 == 13 ? year + 1 : year;
+                month = month + 1 == 13 ? 1 : month + 1;
+
+                var days = this.GetDaysOfMonth(year, month);
+                day = days >= day ? day : days;
+
+                return year + '-' + ('00' + month).slice(-2) + '-' + ('00' + day).slice(-2);
+            }
+        };
+    </script>
+</body>
+</html>
